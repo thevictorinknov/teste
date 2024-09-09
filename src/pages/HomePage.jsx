@@ -2,10 +2,11 @@ import alespLogo from '/alesp.svg';
 import atlanticLogo from '/atlantic.jpg';
 import camprevLogo from '/camprev.png';
 import spprevLogo from '/spprev.png';
-
 import Card from '../components/Card';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage () {
+    const navigate = useNavigate()
     const cards = [
         { title: 'Atlantic (Globais)', image: atlanticLogo, docsLocation: 'notFound' },
         { title: 'Alesp', image: alespLogo, docsLocation: '/docs/alesp/index.html' },
@@ -13,9 +14,8 @@ export default function HomePage () {
         { title: 'CAMPREV', image: camprevLogo, docsLocation: '' }
       ];
     
-      function redirectDocs (card) {
-        console.log(card)
-        window.location.href = card.docsLocation
+      function redirectDocs ({ title, docsLocation: docs }) {
+        navigate(`/docs?ref=${docs}&title=${title}`)
       }
     
       return (
